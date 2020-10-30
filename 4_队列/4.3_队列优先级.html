@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+
+  // priority数值越大的，优先级越高
+  function PriorityQueue() {
+
+
+    function EleAndPri(element, priority) {
+      this.element = element;
+      this.priority = priority;
+    }
+    this.arr = [];
+    PriorityQueue.prototype.insert = function (element, priority) {
+      var elementAndPriority = new EleAndPri(element, priority);
+
+      if (this.arr.length == 0) {
+        this.arr.push(elementAndPriority);
+      } else {
+        var add = false;
+        for (var i = 0; i < this.arr.length; i++) {
+          if (this.arr[i].priority > elementAndPriority.priority) {
+            this.arr.splice(i, 0, elementAndPriority);
+            add = true;
+            break;
+          }
+        }
+        if (!add) {
+          this.arr.push(elementAndPriority);
+        }
+      }
+    }
+
+    PriorityQueue.prototype.toStr=function () {
+      var str = '';
+      for (var i = 0; i < this.arr.length; i++) {
+        str = str + this.arr[i].element;
+      }
+      return str;
+    }
+
+  }
+
+
+  var priorityQueue = new PriorityQueue();
+  priorityQueue.insert('第一次插入优先级3', 3)
+  priorityQueue.insert('第二次插入优先级6', 6)
+  priorityQueue.insert('第三次插入优先级2', 2)
+  priorityQueue.insert('第四次插入优先级9', 9)
+  priorityQueue.insert('第五次插入优先级1', 1)
+  // alert(priorityQueue.arr)
+  alert(priorityQueue.toStr())
+</script>
+
+</body>
+</html>

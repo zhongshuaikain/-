@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script>
+  // 打车起步价13，三公里之后，每加一公里加费5元，如果遇到堵车情况额外加费10元
+
+  var car = (function () {
+    var start = 13;
+    var total = 0;
+    return {
+      price: function (a) {
+        if (a < 3) {
+          total = start;
+        } else {
+          total = start + (a - 3) * 5
+        }
+        return total;
+      },
+      yongdu: function (flag) {
+        return flag ? (total + 10) : total;
+      }
+    }
+  })()
+  alert(car.price(10))
+  alert(car.yongdu(true))
+
+</script>
+</body>
+</html>
+
+

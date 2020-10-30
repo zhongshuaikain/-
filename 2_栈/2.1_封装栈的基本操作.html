@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+
+  function Stack() {
+
+    //(推荐)：给Stack类添加数组，能够多对象复用
+   this.arr = [];
+    //给Stack类中的数组入栈一个元素
+    Stack.prototype.push = function (element) {
+      this.arr.push(element);
+    }
+    //移除栈顶的第一个元素,会返回移除的元素值
+    Stack.prototype.pop = () => {
+      return this.arr.pop();
+    }
+    //取出栈顶元素
+    Stack.prototype.peek = () => {
+      return this.arr[this.arr.length - 1];
+    }
+    // isEmpty()： 如果栈里没有元素个数就返回true，有元素则返回false
+    Stack.prototype.isEmpty = function () {
+      return this.arr.length == 0;
+    }
+    // size()：返回栈里的元素个数，这个方法和数组的length属性类似
+    Stack.prototype.size = function () {
+      return this.arr.length;
+    }
+    // toString()： 将栈结构的内容以字符的形式返回
+    Stack.prototype.toStr = () => {
+      const newArr = [];
+      var str='';
+      var love = '❤️'
+      for (var i = 0; i < this.arr.length; i++) {
+        str += this.arr[i];
+        if (i == this.arr.length - 1) {
+          break;
+        }
+        str = str + love;
+      }
+      return str;
+    }
+  }
+
+  const s = new Stack();
+  s.push('入栈元素A');
+  s.push('入栈元素B');
+  s.push('入栈元素C');
+  s.push('入栈元素D');
+  alert("刚刚入栈的元素是：" + s.arr);
+  alert('移除栈顶的第一个元素是：' + s.pop());
+  alert('通过pop()后，此时栈顶的第一个元素是：' + s.peek());
+  alert("此时栈内元素是否为空？" + s.isEmpty())
+  alert("此时栈内元素还有" + s.size() + '个')
+  alert("此时栈内元素转换成string后是" +s.toStr())
+
+</script>
+</body>
+</html>

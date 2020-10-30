@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>盒模型</title>
+
+</head>
+<body>
+
+<script>
+
+
+  function LinkList() {
+    this.length = 0;
+    this.head = null;
+
+    function LinkElement(data, next) {
+      this.data = data;
+      this.next = next;
+    }
+
+//链表追加元素
+    LinkList.prototype.append = function (data, next) {
+      var elementNode = new LinkElement(data, next);
+      if (this.length == 0) {
+        this.head = elementNode;
+      } else {
+        var current = this.head;
+        while (current.next) {
+          current = current.next;
+        }
+        current.next = elementNode;
+      }
+      this.length += 1;
+    }
+
+    // 链表toString
+    LinkList.prototype.toStr = function () {
+      var current = this.head;
+      var str = '';
+      while (current) {
+        str = str + current.data;
+        current = current.next;
+        if (current) {
+          str = str + '❤️';
+        }
+      }
+      return str;
+    }
+
+    //链表中间插入元素
+    LinkList.prototype.insert = function (position, element) {
+      if (position < 0 || position > this.length) {
+        return false;
+      }
+      var elementNode = new LinkElement(element);
+      var index = 0;
+      var current = this.head;
+      var previous = null;
+      if (position == 0) {
+        elementNode.next = this.head;
+        this.head = elementNode;
+      } else {
+        while (index++ < position) {
+          previous = current;
+          current = current.next;
+        }
+        elementNode.next = current;
+        previous.next = elementNode;
+        this.length++;
+      }
+
+    }
+    //根据传入的position获取该位置的元素
+    LinkList.prototype.getPosition = function (position) {
+      if (position < 0 || position >= this.length) {
+        return null;
+      }
+      var index = 0;
+      var current = this.head;
+      while (index++ < position) {
+        current = current.next;
+      }
+      return current.data;
+    }
+
+    // 根据元素查找该元素的位置，如果找到返回位置值，没找到返回-1
+    LinkList.prototype.indexOf = function (element) {
+      var current = this.head;
+      var index = 0;
+      while (current) {
+        if (current.data == element) {
+          return index;
+        } else {
+          current = current.next;
+          index += 1;
+        }
+      }
+      return -1;
+    }
+    //   while (current.data !== element) {
+    //     if (index < this.length-1) {
+    //       current = current.next;
+    //       index = index + 1;
+    //     } else {
+    //       index = -1;
+    //       break;
+    //     }
+    //   }
+    //   return index;
+    // }
+
+    // 修改某个位置的元素
+    LinkList.prototype.updata = function (position, updataElement) {
+      if (position < 0 || position >= this.length) {
+        return false;
+      }
+      var current = this.head;
+      var index = 0;
+      while (index++ < position) {
+        current = current.next;
+      }
+      current.data = updataElement;
+      alert('修改成功，已将' + position + '位置的值修改为' + current.data)
+    }
+
+    // 从列表中的特定位置删除某一项
+    LinkList.prototype.removeAtPosition = function (position) {
+      if (position < 0 || position >= this.length) {
+        return false;
+      }
+      var current = this.head;
+      var previou = null;
+      var next = 0;
+      while (next++ < position) {
+        previou = current;
+        current = current.next;
+      }
+      previou.next = current.next;
+      alert('删除的是' + position + '下标的' + current.data + '元素')
+    }
+
+    // 从列表中的删除某一项
+    LinkList.prototype.removeElement = function (element) {
+      var current = this.head;
+      var previous = null;
+      while (current) {
+        if (current.data == element) {
+          previous.next = current.next;
+          alert('删除' + element + '成功');
+          return true;
+        } else {
+          previous = current;
+          current = current.next;
+        }
+      }
+      return false;
+      //
+      //   while (current !== element) {
+      //     previous = current;
+      //     current = current.next;
+      //   }
+      //   previous.next = current.next;
+      // }
+    }
+
+  }
+
+
+  var link = new LinkList();
+  link.append('liugang');
+  link.append('lizi');
+  link.append('honhong');
+  link.append('huanglijuan');
+  link.insert(1, 'zhangsan');
+  link.insert(3, 'sansan');
+
+  alert(link.toStr());
+  // alert(link.getPosition(0))
+  // alert(link.indexOf('sansan'))
+  // link.updata(1, 'updata');
+  // alert(link.toStr())
+  // link.removeAtPosition(3);
+  link.removeElement('lizsi');
+    alert(link.toStr());
+</script>
+</body>
+</html>

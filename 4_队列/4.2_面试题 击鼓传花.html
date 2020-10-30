@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+
+  function Queue() {
+    this.arr = [];
+
+    Queue.prototype.game = function (nameList, num) {
+      for (var i = 0; i < nameList.length; i++) {
+        this.arr.push(nameList[i]);
+      }
+
+      while (this.arr.length > 1) {
+        for (var i = 0; i < num - 1; i++) {
+          this.arr.push(this.arr.shift());
+        }
+        this.arr.shift();
+      }
+      alert(this.arr.length)
+      return this.arr[0];
+    }
+  }
+
+
+  var queue = new Queue();
+  names = ['zhangsan', 'lisi', 'lilei', 'benbeng', 'xiaoli'];
+  alert(queue.game(names,3));
+
+</script>
+
+</body>
+</html>
